@@ -16,6 +16,20 @@ from utils import AvgMeter, get_lr
 
 def make_train_valid_dfs():
     dataframe = pd.read_csv(f"{CFG.captions_path}/captions.csv")
+    image_names = dataframe["image"].values
+    ids = []
+    current_image_name = None
+    current_id = 0
+    for index, image_name in enumerate(image_names):
+        if image_name != current_image_name:
+            current_image_name = image_name
+            current_id += 1
+        ids.append(current_id)
+    ids = np.array(ids)
+    ids -= 1
+    dataframe["id"] = ids
+
+
     max_id = dataframe["id"].max() + 1 if not CFG.debug else 100
     image_ids = np.arange(0, max_id)
     np.random.seed(42)
