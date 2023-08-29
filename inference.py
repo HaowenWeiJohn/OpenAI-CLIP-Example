@@ -7,7 +7,7 @@ from transformers import DistilBertTokenizer
 import matplotlib.pyplot as plt
 
 import config as CFG
-from main import build_loaders
+from main import build_loaders, make_train_valid_dfs
 from CLIP import CLIPModel
 
 def get_image_embeddings(valid_df, model_path):
@@ -54,3 +54,14 @@ def find_matches(model, image_embeddings, query, image_filenames, n=9):
         ax.axis("off")
     
     plt.show()
+
+
+if __name__ == '__main__':
+    _, valid_df = make_train_valid_dfs()
+    model, image_embeddings = get_image_embeddings(valid_df, "best.pt")
+
+    find_matches(model,
+                 image_embeddings,
+                 query="dog", # a group of people dancing
+                 image_filenames=valid_df['image'].values,
+                 n=9)
