@@ -1,8 +1,12 @@
 import torch
 
-debug = True
+debug = False
 image_path = "D:/HaowenWei/Data/CLIP/Flickr-8k-Dataset/Images"
 captions_path = "D:/HaowenWei/Data/CLIP/Flickr-8k-Dataset"
+
+# image_path = "D:/HaowenWei/Data/CLIP/Flickr-8k-Dataset/Images"
+# captions_path = "D:/HaowenWei/Data/CLIP/Flickr-8k-Dataset"
+
 batch_size = 8
 num_workers = 0
 lr = 1e-3
